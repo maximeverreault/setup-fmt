@@ -13,7 +13,7 @@ async function run(): Promise<void> {
     } catch (e) {
       core.error('Failed to create FMT working directory')
     }
-    const version: string = core.getInput('version') || '9.1.0'
+    const version: string = core.getInput('version') || 'latest'
     core.info(`Fetching FMT version: ${version} ...`)
     core.debug(`FMT working directory: ${directory}`)
     if (version === 'latest') {
@@ -26,7 +26,7 @@ async function run(): Promise<void> {
           'fmtlib/fmt',
           '--clobber',
           '--pattern',
-          `'*.zip'`
+          'fmt*.zip'
         ],
         {
           cwd: directory
@@ -55,7 +55,7 @@ async function run(): Promise<void> {
     const fileSavePath = await tc.extractZip(zipFile[0], directory)
     core.debug(`Extracted FMT to ${fileSavePath}`)
 
-    const fmtFolderPattern = await glob.create(`${directory}/fmt*`, {
+    const fmtFolderPattern = await glob.create(`${directory}/fmt*/`, {
       followSymbolicLinks: false,
       matchDirectories: true,
       implicitDescendants: false
