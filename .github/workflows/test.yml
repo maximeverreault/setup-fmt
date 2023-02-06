@@ -25,5 +25,4 @@ jobs:
         with:
           directory: ${{ runner.temp }}/temp
           version: 9.1.0
-          toolset: Ninja
           platform: x64
