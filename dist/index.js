@@ -95,7 +95,7 @@ function run() {
             const toolset = core.getInput('toolset');
             // const platform: string = core.getInput('platform')
             yield io.mkdirP(`${fmtFolder}/build`);
-            const args = toolset ? ['..', '-G', toolset] : ['..'];
+            const args = toolset !== 'auto' ? ['..', '-G', toolset] : ['..'];
             yield exec.exec('cmake', args, {
                 cwd: `${fmtFolder}/build`
             });
