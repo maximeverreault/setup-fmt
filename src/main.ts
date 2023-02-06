@@ -67,7 +67,8 @@ async function run(): Promise<void> {
     // const platform: string = core.getInput('platform')
 
     await io.mkdirP(`${fmtFolder}/build`)
-    await exec.exec('cmake', ['..', '-G', toolset], {
+    const args = toolset ? ['..', '-G', toolset] : ['..']
+    await exec.exec('cmake', args, {
       cwd: `${fmtFolder}/build`
     })
     await exec.exec('cmake', ['--build', 'build', '--target', 'install'], {
