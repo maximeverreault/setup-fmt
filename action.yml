@@ -20,4 +20,6 @@ inputs:
     default: 'runner.temp/fmt'
 runs:
   using: 'node16'
-  main: 'dist/index.js'
+  main: 'dist/main/index.js'
+  post: 'dist/save/index.js'
+  post-if: success()

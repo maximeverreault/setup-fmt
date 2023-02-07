@@ -8,10 +8,11 @@ async function run(): Promise<void> {
   try {
     const directory: string =
       core.getInput('directory') || `${process.env['RUNNER_TEMP']}/fmt`
+    const installDir = `${directory}/install`
     try {
       await io.mkdirP(directory)
     } catch (e) {
-      core.error('Failed to create FMT working directory')
+      core.setFailed('Failed to create FMT working directory')
     }
     const version: string = core.getInput('version') || 'latest'
     core.info(`Fetching FMT version: ${version} ...`)
@@ -67,13 +68,17 @@ async function run(): Promise<void> {
     // const platform: string = core.getInput('platform')
 
     await io.mkdirP(`${fmtFolder}/build`)
-    const args = toolset !== 'auto' ? ['..', '-G', toolset] : ['..']
+    const args =
+      toolset !== 'auto'
+        ? ['..', '-G', toolset, `-DCMAKE_INSTALL_PREFIX:PATH=${installDir}`]
+        : ['..', `-DCMAKE_INSTALL_PREFIX:PATH=${installDir}`]
     await exec.exec('cmake', args, {
       cwd: `${fmtFolder}/build`
     })
     await exec.exec('cmake', ['--build', 'build', '--target', 'install'], {
       cwd: fmtFolder
     })
+    core.addPath(installDir)
 
     core.setOutput('time', new Date().toTimeString())
   } catch (error) {
