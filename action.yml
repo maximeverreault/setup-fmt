@@ -23,3 +23,6 @@ runs:
   main: 'dist/main/index.js'
   post: 'dist/save/index.js'
   post-if: success()
+branding:
+  icon: package
+  color: blue
