@@ -68145,6 +68145,7 @@ function run() {
             ];
             const cacheKey = yield cache.restoreCache(paths, key, restoreKeys);
             if (!cacheKey) {
+                core.debug('FMT not found in cache');
                 if (latest) {
                     const ret2 = yield exec.exec('gh', [
                         'release',
@@ -68197,6 +68198,9 @@ function run() {
                     cwd: fmtFolder
                 });
                 yield cache.saveCache(paths, key);
+            }
+            else {
+                core.debug(`Found FMT with key ${cacheKey}`);
             }
             core.addPath(installDir);
             core.setOutput('time', new Date().toTimeString());
