@@ -68197,13 +68197,15 @@ function run() {
                 yield exec.exec('cmake', ['--build', 'build', '--target', 'install'], {
                     cwd: fmtFolder
                 });
-                yield cache.saveCache(paths, key);
+                const cacheId = yield cache.saveCache(paths, key);
+                if (cacheId) {
+                    core.debug(`Successfully saved with cache ID ${cacheId}`);
+                }
             }
             else {
                 core.debug(`Found FMT with key ${cacheKey}`);
             }
             core.addPath(installDir);
-            core.setOutput('time', new Date().toTimeString());
         }
         catch (error) {
             if (error instanceof Error)
