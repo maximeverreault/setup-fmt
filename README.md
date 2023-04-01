@@ -1,105 +1,75 @@
-<p align="center">
-  <a href="https://github.com/actions/typescript-action/actions"><img alt="typescript-action status" src="https://github.com/actions/typescript-action/workflows/build-test/badge.svg"></a>
-</p>
+# Download and install the FMT library
 
-# Create a JavaScript Action using TypeScript
+Install FMT in GitHub actions using source code.
 
-Use this template to bootstrap the creation of a TypeScript action.:rocket:
+## Inputs
 
-This template includes compilation support, tests, a validation workflow, publishing, and versioning guidance.  
+### `version`
 
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
+**Optional** The FMT version to install, e.g. `9.1.0` or `latest`.
+By default, the latest version of FMT is used. Otherwise, you can use all versions available on the FMT GitHub.
 
-## Create an action from this template
+### `toolset`
 
-Click the `Use this Template` and provide the new repo details for your action
+**Optional** The CMake generator used to generate the build system. Details about CMake generator can be found
+in [the official documentation](https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html). Possible values
+are `auto`, `Ninja`, `MinGW Makefiles`, `Visual Studio 17 2022` and more.
+By default, `auto` is selected which lets CMake decide the best generator for the OS you're building on.
 
-## Code in Main
+### `directory`
 
-> First, you'll need to have a reasonably modern version of `node` handy. This won't work with versions older than 9, for instance.
+**Optional** The build directory where to install the FMT library on the runner.
+Defaults to `{{ runner.temp }}/fmt`. For more information on the `runner.temp` variable, look at
+the [documentation](https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables)
 
-Install the dependencies  
-```bash
-$ npm install
+## Example usage
+
+### Simple automatic configuration
+
+```yml
+- name: Install FMT
+  uses: maximeverreault/setup-fmt@v1.0.0
+  id: install-fmt
 ```
 
-Build the typescript and package it for distribution
-```bash
-$ npm run build && npm run package
+### Recommended explicit configuration compatible with all platforms
+
+```yml
+- name: Install FMT
+  uses: maximeverreault/setup-fmt@v1.0.0
+  id: install-fmt
+  with:
+    version: latest
+    toolset: Ninja
 ```
 
-Run the tests :heavy_check_mark:  
-```bash
-$ npm test
+### Specifying a version with makefiles
 
- PASS  ./index.test.js
-  ✓ throws invalid number (3ms)
-  ✓ wait 500 ms (504ms)
-  ✓ test runs (95ms)
-
-...
+```yml
+- name: Install FMT
+  uses: maximeverreault/setup-fmt@v1.0.0
+  id: install-fmt
+  with:
+    version: 9.1.0
+    toolset: MinGW Makefiles
 ```
 
-## Change action.yml
+### Specifying a directory on a Windows runner
 
-The action.yml defines the inputs and output for your action.
-
-Update the action.yml with your name, description, inputs and outputs for your action.
-
-See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
-
-## Change the Code
-
-Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
-
-```javascript
-import * as core from '@actions/core';
-...
-
-async function run() {
-  try { 
-      ...
-  } 
-  catch (error) {
-    core.setFailed(error.message);
-  }
-}
-
-run()
+```yml
+- name: Install FMT
+  uses: maximeverreault/setup-fmt@v1.0.0
+  id: install-fmt
+  with:
+      directory: C:\fmt-install
 ```
 
-See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
+### Specifying a directory on a MacOS/Linux runner
 
-## Publish to a distribution branch
-
-Actions are run from GitHub repos so we will checkin the packed dist folder. 
-
-Then run [ncc](https://github.com/zeit/ncc) and push the results:
-```bash
-$ npm run package
-$ git add dist
-$ git commit -a -m "prod dependencies"
-$ git push origin releases/v1
+```yml
+- name: Install FMT
+  uses: maximeverreault/setup-fmt@v1.0.0
+  id: install-fmt
+  with:
+      directory: /usr/bin/fmt
 ```
-
-Note: We recommend using the `--license` option for ncc, which will create a license file for all of the production node modules used in your project.
-
-Your action is now published! :rocket: 
-
-See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
-
-## Validate
-
-You can now validate the action by referencing `./` in a workflow in your repo (see [test.yml](.github/workflows/test.yml))
-
-```yaml
-uses: ./
-with:
-  milliseconds: 1000
-```
-
-See the [actions tab](https://github.com/actions/typescript-action/actions) for runs of this action! :rocket:
-
-## Usage:
-
-After testing you can [create a v1 tag](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md) to reference the stable and latest V1 action
