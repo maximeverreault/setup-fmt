@@ -8,12 +8,8 @@ inputs:
     default: 'latest'
   toolset:
     required: false
-    description: 'auto, mingw, msvc, clang, gcc'
+    description: 'The CMake generator used to generate the build system, e.g. `auto`, `Ninja`, `MinGW Makefiles`, `Visual Studio 17 2022`'
     default: 'auto'
-  platform:
-    required: false
-    description: 'x64 or x86'
-    default: 'x64'
   directory:
     required: false
     description: 'Build directory. Default is runner.temp/fmt'
@@ -21,8 +17,6 @@ inputs:
 runs:
   using: 'node16'
   main: 'dist/main/index.js'
-  post: 'dist/save/index.js'
-  post-if: success()
 branding:
   icon: package
   color: blue
