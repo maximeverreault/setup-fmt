@@ -1,8 +1,11 @@
 ![Build and test status](https://github.com/maximeverreault/setup-fmt/actions/workflows/test.yml/badge.svg)![Analysis status](https://github.com/maximeverreault/setup-fmt/actions/workflows/codeql-analysis.yml/badge.svg)![Packaging status](https://github.com/maximeverreault/setup-fmt/actions/workflows/check-dist.yml/badge.svg)
 
-# Download and install the FMT library
+# Download, build and install the FMT library
 
-Install FMT in GitHub actions using source code.
+Install FMT in GitHub actions for C++ projects.
+
+[FMT library GitHub repo](https://github.com/fmtlib/fmt)
+[FMT library documentation](https://fmt.dev/latest/index.html)
 
 ## Inputs
 
