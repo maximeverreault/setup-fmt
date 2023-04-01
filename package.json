@@ -5,11 +5,11 @@
   "description": "TypeScript template action",
   "main": "lib/main.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.json",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
     "lint": "eslint src/**/*.ts",
-    "package": "ncc build --source-map --license licenses.txt",
+    "package": "ncc build --source-map --license licenses.txt -o dist/save src/save.ts && ncc build --source-map --license licenses.txt -o dist/main src/main.ts",
     "test": "jest",
     "all": "npm run build && npm run format && npm run lint && npm run package && npm test",
     "dev": "npm run build && node lib/main.js"
@@ -45,6 +45,7 @@
     "js-yaml": "^4.1.0",
     "prettier": "2.8.3",
     "ts-jest": "^27.1.2",
+    "ts-node": "^10.9.1",
     "typescript": "^4.4.4"
   }
 }

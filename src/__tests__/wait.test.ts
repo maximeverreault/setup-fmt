@@ -1,5 +1,5 @@
-import {wait} from '../src/wait'
 import {expect, test} from '@jest/globals'
+import {wait} from '../wait'
 
 test('throws invalid number', async () => {
   const input = parseInt('foo', 10)
@@ -10,6 +10,6 @@ test('wait 500 ms', async () => {
   const start = new Date()
   await wait(500)
   const end = new Date()
-  var delta = Math.abs(end.getTime() - start.getTime())
+  const delta = Math.abs(end.getTime() - start.getTime())
   expect(delta).toBeGreaterThan(450)
 })
