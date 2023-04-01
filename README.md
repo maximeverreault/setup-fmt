@@ -1,3 +1,5 @@
+![Build and test status](https://github.com/maximeverreault/setup-fmt/actions/workflows/test.yml/badge.svg)![Analysis status](https://github.com/maximeverreault/setup-fmt/actions/workflows/codeql-analysis.yml/badge.svg)![Packaging status](https://github.com/maximeverreault/setup-fmt/actions/workflows/check-dist.yml/badge.svg)
+
 # Download and install the FMT library
 
 Install FMT in GitHub actions using source code.
@@ -61,7 +63,7 @@ the [documentation](https://docs.github.com/en/actions/learn-github-actions/vari
   uses: maximeverreault/setup-fmt@v1.0.0
   id: install-fmt
   with:
-      directory: C:\fmt-install
+    directory: C:\fmt-install
 ```
 
 ### Specifying a directory on a MacOS/Linux runner
@@ -71,5 +73,5 @@ the [documentation](https://docs.github.com/en/actions/learn-github-actions/vari
   uses: maximeverreault/setup-fmt@v1.0.0
   id: install-fmt
   with:
-      directory: /usr/bin/fmt
+    directory: /usr/bin/fmt
 ```
