@@ -16,8 +16,8 @@ inputs:
     default: 'x64'
   directory:
     required: false
-    description: 'Build directory. Default is ${{ runner.temp }}/fmt'
-    default: '${{ runner.temp }}/fmt'
+    description: 'Build directory. Default is runner.temp/fmt'
+    default: 'runner.temp/fmt'
 runs:
   using: 'node16'
   main: 'dist/index.js'
