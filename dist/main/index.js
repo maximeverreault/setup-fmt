@@ -65360,7 +65360,14 @@ function run() {
                     }
                 }
                 else {
-                    const ret = yield exec.exec('gh', ['release', 'download', version, '--clobber', '-R', 'fmtlib/fmt'], {
+                    const ret = yield exec.exec('gh', [
+                        'release',
+                        'download',
+                        version,
+                        '--clobber',
+                        '-R',
+                        'fmtlib/fmt'
+                    ], {
                         cwd: directory
                     });
                     if (ret !== 0) {
@@ -65386,7 +65393,12 @@ function run() {
                 // const platform: string = core.getInput('platform')
                 yield io.mkdirP(`${fmtFolder}/build`);
                 const args = toolset !== 'auto'
-                    ? ['..', '-G', toolset, `-DCMAKE_INSTALL_PREFIX:PATH=${installDir}`]
+                    ? [
+                        '..',
+                        '-G',
+                        toolset,
+                        `-DCMAKE_INSTALL_PREFIX:PATH=${installDir}`
+                    ]
                     : ['..', `-DCMAKE_INSTALL_PREFIX:PATH=${installDir}`];
                 yield exec.exec('cmake', args, {
                     cwd: `${fmtFolder}/build`
