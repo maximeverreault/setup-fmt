@@ -14,6 +14,9 @@ inputs:
     required: false
     description: 'Build directory. Default is runner.temp/fmt'
     default: 'runner.temp/fmt'
+outputs:
+  fmt_dir:
+    description: The installation folder for the FMT library
 runs:
   using: 'node16'
   main: 'dist/main/index.js'

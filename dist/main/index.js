@@ -65415,6 +65415,7 @@ function run() {
                 core.debug(`Found FMT with key ${cacheKey}`);
             }
             core.addPath(installDir);
+            core.setOutput('fmt_dir', installDir);
         }
         catch (error) {
             if (error instanceof Error)
