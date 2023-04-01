@@ -5,13 +5,14 @@
   "description": "TypeScript template action",
   "main": "lib/main.js",
   "scripts": {
-    "build": "tsc",
-    "format": "prettier --write '**/*.ts'",
-    "format-check": "prettier --check '**/*.ts'",
+    "build": "tsc -p tsconfig.json",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
     "lint": "eslint src/**/*.ts",
-    "package": "ncc build --source-map --license licenses.txt",
+    "package": "ncc build --source-map --license licenses.txt -o dist/save src/save.ts && ncc build --source-map --license licenses.txt -o dist/main src/main.ts",
     "test": "jest",
-    "all": "npm run build && npm run format && npm run lint && npm run package && npm test"
+    "all": "npm run build && npm run format && npm run lint && npm run package && npm test",
+    "dev": "npm run build && node lib/main.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,13 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.10.0"
+    "@actions/core": "^1.10.0",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^5.1.1",
+    "@actions/glob": "^0.4.0",
+    "@actions/http-client": "^2.0.1",
+    "@actions/io": "^1.1.2",
+    "@actions/tool-cache": "^2.0.1"
   },
   "devDependencies": {
     "@types/node": "^18.11.0",
@@ -38,6 +45,7 @@
     "js-yaml": "^4.1.0",
     "prettier": "2.8.3",
     "ts-jest": "^27.1.2",
+    "ts-node": "^10.9.1",
     "typescript": "^4.4.4"
   }
 }
