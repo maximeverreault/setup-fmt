@@ -27,6 +27,18 @@ By default, `auto` is selected which lets CMake decide the best generator for th
 Defaults to `{{ runner.temp }}/fmt`. For more information on the `runner.temp` variable, look at
 the [documentation](https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables)
 
+## Outputs
+
+### `fmt_dir`
+
+The installation folder for the FMT library. It can be used in CMake like this:
+
+```bash
+cmake -S . -B build -D "FMT_DIR=${{ steps.install_fmt.outputs.fmt_dir }}"
+```
+
+So that the `find_package(fmt)` call can use the variable to find the library.
+
 ## Example usage
 
 ### Simple automatic configuration
@@ -34,7 +46,7 @@ the [documentation](https://docs.github.com/en/actions/learn-github-actions/vari
 ```yml
 - name: Install FMT
   uses: maximeverreault/setup-fmt@v1.0.0
-  id: install-fmt
+  id: install_fmt
 ```
 
 ### Recommended explicit configuration compatible with all platforms
@@ -42,10 +54,11 @@ the [documentation](https://docs.github.com/en/actions/learn-github-actions/vari
 ```yml
 - name: Install FMT
   uses: maximeverreault/setup-fmt@v1.0.0
-  id: install-fmt
+  id: install_fmt
   with:
     version: latest
     toolset: Ninja
+    directory: ${{ runner.temp }}/fmt
 ```
 
 ### Specifying a version with makefiles
@@ -53,7 +66,7 @@ the [documentation](https://docs.github.com/en/actions/learn-github-actions/vari
 ```yml
 - name: Install FMT
   uses: maximeverreault/setup-fmt@v1.0.0
-  id: install-fmt
+  id: install_fmt
   with:
     version: 9.1.0
     toolset: MinGW Makefiles
@@ -64,7 +77,7 @@ the [documentation](https://docs.github.com/en/actions/learn-github-actions/vari
 ```yml
 - name: Install FMT
   uses: maximeverreault/setup-fmt@v1.0.0
-  id: install-fmt
+  id: install_fmt
   with:
     directory: C:\fmt-install
 ```
@@ -74,7 +87,7 @@ the [documentation](https://docs.github.com/en/actions/learn-github-actions/vari
 ```yml
 - name: Install FMT
   uses: maximeverreault/setup-fmt@v1.0.0
-  id: install-fmt
+  id: install_fmt
   with:
     directory: /usr/bin/fmt
 ```

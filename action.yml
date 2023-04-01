@@ -12,8 +12,7 @@ inputs:
     default: 'auto'
   directory:
     required: false
-    description: 'Build directory. Default is runner.temp/fmt'
-    default: 'runner.temp/fmt'
+    description: 'Build directory. Default is the GitHub actions environment variable with subdirectory `fmt`:  `runner.temp/fmt`'
 outputs:
   fmt_dir:
     description: The installation folder for the FMT library
