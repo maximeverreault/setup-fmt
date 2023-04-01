@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","mappings":";;;AAAA;AACA","sources":["../webpack://setup-fmt/webpack/runtime/compat","../webpack://setup-fmt/./src/save.ts"],"sourcesContent":["\nif (typeof __webpack_require__ !== 'undefined') __webpack_require__.ab = __dirname + \"/\";"],"names":[],"sourceRoot":""}
