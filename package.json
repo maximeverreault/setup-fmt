@@ -1,8 +1,8 @@
 {
-  "name": "typescript-action",
-  "version": "0.0.0",
+  "name": "setup-fmt",
+  "version": "1.0.0",
   "private": true,
-  "description": "TypeScript template action",
+  "description": "Download, build and install the FMT C++ library",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -16,14 +16,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
+    "url": "git+https://github.com/maximeverreault/setup-fmt.git"
   },
   "keywords": [
     "actions",
     "node",
-    "setup"
+    "setup",
+    "fmt",
+    "cpp",
+    "c++"
   ],
-  "author": "",
+  "author": "Maxime Verreault",
   "license": "MIT",
   "dependencies": {
     "@actions/cache": "^3.2.1",
